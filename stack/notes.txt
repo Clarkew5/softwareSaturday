@@ -1,0 +1,8 @@
+stack struct that contains a pointer to the head and size
+
+node struct contains data and a pointer to the next/child node
+
+functions
+    push, adds a node to the stack at the head
+    peak, returns the value of the head node
+    pop, removes a node at the head
