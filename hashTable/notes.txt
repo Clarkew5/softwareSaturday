@@ -1,0 +1,18 @@
+hash table struct contains an array of node pointers that point to a linked list
+of node structs
+
+node struct contains a key string, a value string, and a link to the next node
+
+functions:
+    hash function to get index of array
+    create key value pair to hash table (tells user if entry exists else errors)
+    return value of specific key (tells user if key does not exist)
+    update value in hash table (tells user key does not exist and errors)
+    delete key value pair in hash table (tells user if key does not exist)
+
+
+[]
+[] -> []
+[]
+[] -> [] -> []
+[]
