@@ -1,0 +1,36 @@
+A heap is a tree data structre that sorts the data when it is inserted, with the
+min or max value at its head
+
+tree implementation
+      [2]
+  [4]     [7]
+[5] [6] [ ]  [ ]
+
+array/vector implementation of heap
+ 0      1   2   3   4   5   6   7
+[null] [2]|[4] [7]|[5] [6] [ ] [ ]|
+left child index = 2i
+right child index = 2i + 1
+parent index = i/2
+
+our implementation
+struct called tree level, containing key and value array
+double linked list containing all the levels in order
+tree level 1 []
+tree level 2 [] []
+tree level 3 [] [] [] []
+array size per level = 2^level
+left child index = level + 1, parent index * 2
+right child index = level + 1, parent index * 2 + 1
+parent index = level - 1, child index/2
+
+functions:
+    - swap: two nodes in the tree
+    - push: add data to the node at the lowest level at the first open index in
+    the array and then run upHeap
+    - upHeap: swap parent and child so that heap structre is maintained,
+    starting with newly added node
+    - peak: return value of head node
+    - pop: remove head of node, move most recent inset to the head run downHeap
+    - downHeap: swap parent and child to maintian heap structre (smallest if min
+    heap, largest if max heap), starting with head
