@@ -32,6 +32,7 @@ int deleteHashTable(hashTable* hT, int fkFlag, int fdFlag) {
 
 int insert(hashTable* hT, int hashFun(hashTable* hT,  void* key), int compare(void* a,  void* b), void* key, void* value) {
     htNode* iNode = malloc(sizeof(htNode)); //insert node
+
     iNode->key = key;
     iNode->value = value;
     iNode->child = NULL;
