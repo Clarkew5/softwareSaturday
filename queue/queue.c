@@ -8,15 +8,17 @@ queue* createQueue() {
     return q;
 }
 
-int deleteQueue(queue* q) {
+int deleteQueue(queue* q, int fFlag) {
     if (queueSize(q) > 0) {
         node* cNode = q->head; //current node
         node* nNode = cNode->child; //next node
+        if(fFlag == 1) free(cNode->data);
         free(cNode);
 
         while (nNode != NULL) {
             cNode = nNode;
             nNode = cNode->child;
+            if(fFlag == 1) free(cNode->data);
             free(cNode);
         }
     }
@@ -28,10 +30,12 @@ int queueSize(queue* q) {
     return q->size;
 }
 
-int peek(queue* q) {
+void* peek(queue* q) {
     return q->head->data;
 }
 
+/*  DEPRICATED, TODO take in funtion pointer for displaying void pointer
+    node->data
 int printQueue(queue* q) {
     if (queueSize(q) > 0) {
         node* cNode = q->head; //current node
@@ -48,8 +52,9 @@ int printQueue(queue* q) {
     }
     return 0;
 }
+*/
 
-int push(queue* q, int data) {
+int push(queue* q, void* data) {
     q->size++;
     struct node* n = malloc(sizeof(node));
     n->data = data;
@@ -64,9 +69,9 @@ int push(queue* q, int data) {
     return 0;
 }
 
-int pop(queue* q) {
+void* pop(queue* q) {
     q->size--;
-    int d = peek(q); //data
+    void* d = peek(q); //data
     node* oldHead = q->head;
     q->head = oldHead->child;
     free(oldHead);
