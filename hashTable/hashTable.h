@@ -3,8 +3,8 @@
 #include <string.h>
 
 typedef struct node {
-    char* key;
-    char* value;
+    void* key;
+    void* value;
     struct node* child;
 } node;
 
@@ -13,12 +13,10 @@ typedef struct {
     struct node** array;
 } hashTable;
 
-int hashFunction(hashTable* hT, char* key);
-
 hashTable* createHashTable(int size);
 int deleteHashTable(hashTable* hT);
 
-int insert(hashTable* hT, char* key, char* value);
-char* lookup(hashTable* hT, char* key);
-int update(hashTable* hT, char* key, char* value);
-int removeEnrty(hashTable* hT, char* key);
+int insert(hashTable* hT, int (hashFun)(hashTable* hT, void* key), int compare(void* a, void* b), char* key, char* value);
+char* lookup(hashTable* hT, int (hashFun)(hashTable* hT, void* key), int compare(void* a, void* b), char* key);
+int update(hashTable* hT, int (hashFun)(hashTable* hT, void* key), int compare(void* a, void* b), char* key, char* value);
+int removeEnrty(hashTable* hT, int (hashFun)(hashTable* hT, void* key), int compare(void* a, void* b), char* key);
