@@ -6,7 +6,7 @@ heap* createHeap() {
 
     h->head->arraySize = 1;
     h->head->insertIndex = 0;
-    h->head->data = calloc(h->head->arraySize, sizeof(node));
+    h->head->data = calloc(h->head->arraySize, sizeof(hNode));
     h->head->parent = NULL;
     h->head->child = NULL;
 
@@ -15,9 +15,10 @@ heap* createHeap() {
     return h;
 }
 
-int deleteHeap(heap* h) {
+int deleteHeap(heap* h, int fFlag) {
     treeLevel* cLevel = h->head;
     treeLevel* nLevel = cLevel->child;
+    if (fFlag == 1) free(cLevel->data[0]->data);
     free(cLevel->data[0]);
     free(cLevel->data);
     free(cLevel);
@@ -26,6 +27,8 @@ int deleteHeap(heap* h) {
         cLevel = nLevel;
         nLevel = cLevel->child;
         for(int i = 0; i < cLevel->arraySize; i++) {
+            if (fFlag == 1 && cLevel->data[i] != NULL) 
+                free(cLevel->data[i]->data);
             free(cLevel->data[i]);
         }
         free(cLevel->data);
@@ -37,7 +40,7 @@ int deleteHeap(heap* h) {
 }
 
 int swap(treeLevel* tl1, int i1, treeLevel* tl2, int i2) {
-    node* temp = tl1->data[i1];
+    hNode* temp = tl1->data[i1];
     tl1->data[i1] = tl2->data[i2];
     tl2->data[i2] = temp;
     return 0;
@@ -48,7 +51,7 @@ int peek(heap* h) {
 }
 
 int push(heap* h, int key, void* data) {
-    node* iNode = malloc(sizeof(node));
+    hNode* iNode = malloc(sizeof(hNode));
     iNode->key = key;
     iNode->data = data;
     h->bottomLevel->data[h->bottomLevel->insertIndex] = iNode;
@@ -58,7 +61,7 @@ int push(heap* h, int key, void* data) {
         treeLevel* iLevel = malloc(sizeof(treeLevel));
         iLevel->arraySize = h->bottomLevel->arraySize * 2;
         iLevel->insertIndex = 0;
-        iLevel->data = calloc(iLevel->arraySize, sizeof(node));
+        iLevel->data = calloc(iLevel->arraySize, sizeof(hNode));
         iLevel->parent = h->bottomLevel;
         iLevel->parent->child = iLevel;
         iLevel->child = NULL;
@@ -84,8 +87,9 @@ int upHeap(heap* h) {
     return 0;
 }
 
-node* pop(heap* h) {
-    node* rNode = h->head->data[0];
+void* pop(heap* h) {
+    void* data = h->head->data[0]->data;
+    free(h->head->data[0]);
     h->head->data[0] = NULL;
     if (h->bottomLevel->insertIndex == 0 && h->bottomLevel != h->head) {
         h->bottomLevel = h->bottomLevel->parent;
@@ -96,7 +100,7 @@ node* pop(heap* h) {
     h->bottomLevel->insertIndex--;
     swap(h->head, 0, h->bottomLevel, h->bottomLevel->insertIndex);
     downHeap(h);
-    return rNode;
+    return data;
 }
 
 int downHeap(heap* h) {

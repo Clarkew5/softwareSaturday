@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include "queue.h"
 
+void pf(void * data) {
+    printf("%d->", *((int*)data));
+}
+
 int main(void) {
     queue* q;
     int i = 1;
@@ -210,22 +214,25 @@ int main(void) {
     push(q, (void*)ip);
     deleteQueue(q, 1);
 
-    /*  DEPRICATED, TODO take in funtion pointer for displaying void pointer
-        node->data
     //stadard out testing manualy verify output is 1 2 3 and queue is empty
     q = createQueue();
-    push(q, 1);
-    push(q, 2);
-    push(q, 3);
+    kp = malloc(sizeof(int));
+    *kp = 1;
+    jp = malloc(sizeof(int));
+    *jp = 2;
+    ip = malloc(sizeof(int));
+    *ip = 3;
+    push(q, (void*)kp);
+    push(q, (void*)jp);
+    push(q, (void*)ip);
     printf("Queues are as easy as ");
-    printQueue(q);
-    deleteQueue(q, 0);
+    printQueue(q, pf);
+    deleteQueue(q, 1);
 
 
     q = createQueue();
     printf("\nif nothing is put in the queue then the ");
-    printQueue(q);
+    printQueue(q, NULL);
     deleteQueue(q, 0);
-    */
     return 0;
 }

@@ -1,15 +1,18 @@
+#ifndef QUEUE
+#define QUEUE
+
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct node {
+typedef struct qNode {
     void* data;
-    struct node* child;
-} node;
+    struct qNode* child;
+} qNode;
 
 typedef struct {
     int size;
-    struct node* head;
-    struct node* tail;
+    struct qNode* head;
+    struct qNode* tail;
 } queue;
 
 queue* createQueue();
@@ -17,10 +20,9 @@ int deleteQueue(queue* q, int fFlag);
 
 int queueSize(queue* q);
 void* peek(queue* q);
-/*  DEPRICATED, TODO take in funtion pointer for displaying void pointer
-    node->data
-int printQueue(queue* q);
-*/
+int printQueue(queue* q, void printData(void* data));
 
 int push(queue* q, void* data);
 void* pop(queue* q);
+
+#endif
