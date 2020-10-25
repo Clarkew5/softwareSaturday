@@ -15,11 +15,11 @@ int main(void) {
         printf("Sort testArray%d: ", i+1);
         h = createHeap();
         for (int j = 0; j < 5; j++){
-            push(h, testArrays[i][j], &testArrays[i][j]);
+            pushHeap(h, testArrays[i][j], &testArrays[i][j]);
         }
         int testArray[5] = {};
         for (int j = 0; j < 5; j++){
-            void* n = pop(h);
+            void* n = popHeap(h);
             testArray[j] = *((int*)n);
         }
         for (int j = 0; j < 5; j++) {
@@ -46,7 +46,7 @@ int main(void) {
     *e = 5;
     int* mallocArray[5] = {a, b, c, d, e};
     for (int i = 0; i < 5; i++) {
-        push(h, testArrays[0][i], mallocArray[i]);
+        pushHeap(h, testArrays[0][i], mallocArray[i]);
     }
     deleteHeap(h, 1);
 }

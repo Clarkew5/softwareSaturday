@@ -30,7 +30,7 @@ int queueSize(queue* q) {
     return q->size;
 }
 
-void* peek(queue* q) {
+void* peekQueue(queue* q) {
     return q->head->data;
 }
 
@@ -51,7 +51,7 @@ int printQueue(queue* q, void printData(void* data)) {
     return 0;
 }
 
-int push(queue* q, void* data) {
+int pushQueue(queue* q, void* data) {
     q->size++;
     struct qNode* n = malloc(sizeof(qNode));
     n->data = data;
@@ -66,9 +66,9 @@ int push(queue* q, void* data) {
     return 0;
 }
 
-void* pop(queue* q) {
+void* popQueue(queue* q) {
     q->size--;
-    void* d = peek(q); //data
+    void* d = peekQueue(q); //data
     qNode* oldHead = q->head;
     q->head = oldHead->child;
     free(oldHead);

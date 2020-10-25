@@ -24,13 +24,11 @@ typedef struct {
 
 heap* createHeap();
 int deleteHeap(heap* h, int fFlag);
+int peekHeap(heap* h);
 
-int swap(treeLevel* tl1, int i1, treeLevel* tl2, int i2);
-int peek(heap* h);
-
-int push(heap* h, int key, void* data);
+int pushHeap(heap* h, int key, void* data);
 int upHeap(heap* h);
-void* pop(heap* h);
+void* popHeap(heap* h);
 int downHeap(heap* h);
 
 int printHeap(heap* h);

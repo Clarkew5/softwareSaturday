@@ -27,7 +27,7 @@ int deleteHeap(heap* h, int fFlag) {
         cLevel = nLevel;
         nLevel = cLevel->child;
         for(int i = 0; i < cLevel->arraySize; i++) {
-            if (fFlag == 1 && cLevel->data[i] != NULL) 
+            if (fFlag == 1 && cLevel->data[i] != NULL)
                 free(cLevel->data[i]->data);
             free(cLevel->data[i]);
         }
@@ -46,11 +46,11 @@ int swap(treeLevel* tl1, int i1, treeLevel* tl2, int i2) {
     return 0;
 }
 
-int peek(heap* h) {
+int peekHeap(heap* h) {
     return h->head->data[0]->key;
 }
 
-int push(heap* h, int key, void* data) {
+int pushHeap(heap* h, int key, void* data) {
     hNode* iNode = malloc(sizeof(hNode));
     iNode->key = key;
     iNode->data = data;
@@ -87,7 +87,7 @@ int upHeap(heap* h) {
     return 0;
 }
 
-void* pop(heap* h) {
+void* popHeap(heap* h) {
     void* data = h->head->data[0]->data;
     free(h->head->data[0]);
     h->head->data[0] = NULL;

@@ -9,19 +9,19 @@ int main(void) {
     printf("push peek pop 1 item:\t");
     s = createStack();
 
-    push(s, 3);
+    pushStack(s, 3);
     if (stackSize(s) != 1) {
         printf("FAIL size was not equal to 1\n");
         deleteStack(s);
         return 1;
     }
 
-    if (peek(s) != 3) {
+    if (peekStack(s) != 3) {
         printf("FAIL peek did not equal 3\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 3) {
+    if (popStack(s) != 3) {
         printf("FAIL pop did not equal 3\n");
         deleteStack(s);
         return 1;
@@ -39,20 +39,20 @@ int main(void) {
     printf("push peek pop 2 items:\t");
     s = createStack();
 
-    push(s, 3);
-    push(s, 2);
+    pushStack(s, 3);
+    pushStack(s, 2);
     if (stackSize(s) != 2) {
         printf("FAIL size was not equal to 2\n");
         deleteStack(s);
         return 1;
     }
 
-    if (peek(s) != 2) {
+    if (peekStack(s) != 2) {
         printf("FAIL peek did not equal 2\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 2) {
+    if (popStack(s) != 2) {
         printf("FAIL pop did not equal 2\n");
         deleteStack(s);
         return 1;
@@ -63,12 +63,12 @@ int main(void) {
         return 1;
     }
 
-    if (peek(s)!= 3) {
+    if (peekStack(s)!= 3) {
         printf("FAIL peek did not equal 3\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 3) {
+    if (popStack(s) != 3) {
         printf("FAIL pop did not equal 3\n");
         deleteStack(s);
         return 1;
@@ -86,21 +86,21 @@ int main(void) {
     printf("push peek pop 3 items:\t");
     s = createStack();
 
-    push(s, 3);
-    push(s, 2);
-    push(s, 1);
+    pushStack(s, 3);
+    pushStack(s, 2);
+    pushStack(s, 1);
     if (stackSize(s) != 3) {
         printf("FAIL size was not equal to 3\n");
         deleteStack(s);
         return 1;
     }
 
-    if (peek(s) != 1) {
+    if (peekStack(s) != 1) {
         printf("FAIL peek did not equal 1\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 1) {
+    if (popStack(s) != 1) {
         printf("FAIL pop did not equal 1\n");
         deleteStack(s);
         return 1;
@@ -111,12 +111,12 @@ int main(void) {
         return 1;
     }
 
-    if (peek(s) != 2) {
+    if (peekStack(s) != 2) {
         printf("FAIL peek did not equal 2\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 2) {
+    if (popStack(s) != 2) {
         printf("FAIL pop did not equal 2\n");
         deleteStack(s);
         return 1;
@@ -127,12 +127,12 @@ int main(void) {
         return 1;
     }
 
-    if (peek(s)!= 3) {
+    if (peekStack(s)!= 3) {
         printf("FAIL peek did not equal 3\n");
         deleteStack(s);
         return 1;
     }
-    if (pop(s) != 3) {
+    if (popStack(s) != 3) {
         printf("FAIL pop did not equal 3\n");
         deleteStack(s);
         return 1;
@@ -153,20 +153,20 @@ int main(void) {
 
     printf("deleting stack size 1\n");
     s = createStack();
-    push(s, 3);
+    pushStack(s, 3);
     deleteStack(s);
 
     printf("deleting stack size 2\n");
     s = createStack();
-    push(s, 3);
-    push(s, 2);
+    pushStack(s, 3);
+    pushStack(s, 2);
     deleteStack(s);
 
     //stadard out testing manualy verify output is 1 2 3 and Stack is empty
     s = createStack();
-    push(s, 3);
-    push(s, 2);
-    push(s, 1);
+    pushStack(s, 3);
+    pushStack(s, 2);
+    pushStack(s, 1);
     printf("stacks are as easy as ");
     printStack(s);
     deleteStack(s);

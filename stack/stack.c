@@ -27,7 +27,7 @@ int stackSize(stack* s) {
     return s->size;
 }
 
-int peek(stack* s){
+int peekStack(stack* s){
     return s->head->data;
 }
 
@@ -49,7 +49,7 @@ int printStack(stack* s) {
     return 0;
 }
 
-int push(stack* s, int data) {
+int pushStack(stack* s, int data) {
     s->size++;
     struct node* n = malloc(sizeof(node));
     n->data = data;
@@ -58,9 +58,9 @@ int push(stack* s, int data) {
     return 0;
 }
 
-int pop(stack* s) {
+int popStack(stack* s) {
     s->size--;
-    int d = peek(s); //data
+    int d = peekStack(s); //data
     node* oldHead = s->head;
     s->head = oldHead->child;
     free(oldHead);

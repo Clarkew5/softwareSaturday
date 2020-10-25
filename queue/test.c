@@ -17,19 +17,19 @@ int main(void) {
     printf("push peek pop 1 item:\t");
     q = createQueue();
 
-    push(q, &i);
+    pushQueue(q, &i);
     if (queueSize(q) != 1) {
         printf("FAIL size was not equal to 1\n");
         deleteQueue(q, 0);
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 1) {
+    if ( *((int*)peekQueue(q)) != 1) {
         printf("FAIL peek did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 1) {
+    if ( *((int*)popQueue(q)) != 1) {
         printf("FAIL pop did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
@@ -47,20 +47,20 @@ int main(void) {
     printf("push peek pop 2 items:\t");
     q = createQueue();
 
-    push(q, &i);
-    push(q, &j);
+    pushQueue(q, &i);
+    pushQueue(q, &j);
     if (queueSize(q) != 2) {
         printf("FAIL size was not equal to 2\n");
         deleteQueue(q, 0);
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 1) {
+    if ( *((int*)peekQueue(q)) != 1) {
         printf("FAIL peek did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 1) {
+    if ( *((int*)popQueue(q)) != 1) {
         printf("FAIL pop did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
@@ -71,12 +71,12 @@ int main(void) {
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 2) {
+    if ( *((int*)peekQueue(q)) != 2) {
         printf("FAIL peek did not equal 2\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 2) {
+    if ( *((int*)popQueue(q)) != 2) {
         printf("FAIL pop did not equal 2\n");
         deleteQueue(q, 0);
         return 1;
@@ -94,9 +94,9 @@ int main(void) {
     printf("push peek pop 3 items:\t");
     q = createQueue();
 
-    push(q, &i);
-    push(q, &j);
-    push(q, &k);
+    pushQueue(q, &i);
+    pushQueue(q, &j);
+    pushQueue(q, &k);
 
     if (queueSize(q) != 3) {
         printf("FAIL size was not equal to 3\n");
@@ -104,12 +104,12 @@ int main(void) {
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 1) {
+    if ( *((int*)peekQueue(q)) != 1) {
         printf("FAIL peek did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 1) {
+    if ( *((int*)popQueue(q)) != 1) {
         printf("FAIL pop did not equal 1\n");
         deleteQueue(q, 0);
         return 1;
@@ -120,12 +120,12 @@ int main(void) {
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 2) {
+    if ( *((int*)peekQueue(q)) != 2) {
         printf("FAIL peek did not equal 2\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 2) {
+    if ( *((int*)popQueue(q)) != 2) {
         printf("FAIL pop did not equal 2\n");
         deleteQueue(q, 0);
         return 1;
@@ -136,12 +136,12 @@ int main(void) {
         return 1;
     }
 
-    if ( *((int*)peek(q)) != 3) {
+    if ( *((int*)peekQueue(q)) != 3) {
         printf("FAIL peek did not equal 3\n");
         deleteQueue(q, 0);
         return 1;
     }
-    if ( *((int*)pop(q)) != 3) {
+    if ( *((int*)popQueue(q)) != 3) {
         printf("FAIL pop did not equal 3\n");
         deleteQueue(q, 0);
         return 1;
@@ -162,20 +162,20 @@ int main(void) {
 
     printf("deleting queue size 1\n");
     q = createQueue();
-    push(q, &k);
+    pushQueue(q, &k);
     deleteQueue(q, 0);
 
     printf("deleting queue size 2\n");
     q = createQueue();
-    push(q, &k);
-    push(q, &j);
+    pushQueue(q, &k);
+    pushQueue(q, &j);
     deleteQueue(q, 0);
 
     printf("deleting queue size 3\n");
     q = createQueue();
-    push(q, &k);
-    push(q, &j);
-    push(q, &i);
+    pushQueue(q, &k);
+    pushQueue(q, &j);
+    pushQueue(q, &i);
     deleteQueue(q, 0);
 
     //memory tests run with valgrind to check
@@ -187,7 +187,7 @@ int main(void) {
     q = createQueue();
     int* kp = malloc(sizeof(int));
     *kp = 3;
-    push(q, (void*)kp);
+    pushQueue(q, (void*)kp);
     deleteQueue(q, 1);
 
     printf("deleting queue with freeing data size 2\n");
@@ -197,8 +197,8 @@ int main(void) {
     *kp = 3;
     int* jp = malloc(sizeof(int));
     *jp = 2;
-    push(q, (void*)kp);
-    push(q, (void*)jp);
+    pushQueue(q, (void*)kp);
+    pushQueue(q, (void*)jp);
     deleteQueue(q, 1);
 
     printf("deleting queue with freeing data size 3\n");
@@ -209,9 +209,9 @@ int main(void) {
     *jp = 2;
     int* ip = malloc(sizeof(int));
     *ip = 1;
-    push(q, (void*)kp);
-    push(q, (void*)jp);
-    push(q, (void*)ip);
+    pushQueue(q, (void*)kp);
+    pushQueue(q, (void*)jp);
+    pushQueue(q, (void*)ip);
     deleteQueue(q, 1);
 
     //stadard out testing manualy verify output is 1 2 3 and queue is empty
@@ -222,9 +222,9 @@ int main(void) {
     *jp = 2;
     ip = malloc(sizeof(int));
     *ip = 3;
-    push(q, (void*)kp);
-    push(q, (void*)jp);
-    push(q, (void*)ip);
+    pushQueue(q, (void*)kp);
+    pushQueue(q, (void*)jp);
+    pushQueue(q, (void*)ip);
     printf("Queues are as easy as ");
     printQueue(q, pf);
     deleteQueue(q, 1);

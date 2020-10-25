@@ -15,8 +15,8 @@ stack* createStack();
 int deleteStack(stack* s);
 
 int stackSize(stack* s);
-int peek(stack* s);
+int peekStack(stack* s);
 int printStack(stack* s);
 
-int push(stack* s, int data);
-int pop(stack* s);
+int pushStack(stack* s, int data);
+int popStack(stack* s);

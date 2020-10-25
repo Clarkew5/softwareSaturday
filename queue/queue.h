@@ -19,10 +19,10 @@ queue* createQueue();
 int deleteQueue(queue* q, int fFlag);
 
 int queueSize(queue* q);
-void* peek(queue* q);
+void* peekQueue(queue* q);
 int printQueue(queue* q, void printData(void* data));
 
-int push(queue* q, void* data);
-void* pop(queue* q);
+int pushQueue(queue* q, void* data);
+void* popQueue(queue* q);
 
 #endif
