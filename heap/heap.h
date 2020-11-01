@@ -18,6 +18,7 @@ typedef struct treeLevel {
 } treeLevel;
 
 typedef struct {
+    int size;
     treeLevel* head;
     treeLevel* bottomLevel;
 } heap;
@@ -25,6 +26,7 @@ typedef struct {
 heap* createHeap();
 int deleteHeap(heap* h, int fFlag);
 int peekHeap(heap* h);
+int heapSize(heap* h);
 
 int pushHeap(heap* h, int key, void* data);
 int upHeap(heap* h);
