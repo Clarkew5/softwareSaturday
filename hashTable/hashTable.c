@@ -30,13 +30,18 @@ int deleteHashTable(hashTable* hT, int fkFlag, int fdFlag) {
     return 0;
 }
 
-int insert(hashTable* hT, int hashFun(hashTable* hT,  void * key), int compare(void* a,  void* b), char* key, char* value) {
+int insert(hashTable* hT, int hashFun(hashTable* hT,  void* key), int compare(void* a,  void* b), void* key, void* value) {
     htNode* iNode = malloc(sizeof(htNode)); //insert node
     iNode->key = key;
     iNode->value = value;
     iNode->child = NULL;
 
     int index = hashFun(hT, key);
+    if (index < 0) {
+        printf("Error: hash function returned a negative index\n");
+        free(iNode);
+        return 1;
+    }
     if (hT->array[index] == NULL) {
         hT->array[index] = iNode;
     } else {
@@ -56,8 +61,12 @@ int insert(hashTable* hT, int hashFun(hashTable* hT,  void * key), int compare(v
     return 0;
 }
 
-char* lookup(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(void* a, void* b), char* key) {
+void* lookup(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key) {
     int index = hashFun(hT, key);
+    if (index < 0) {
+        printf("Error: hash function returned a negative index\n");
+        return NULL;
+    }
     if (hT->array[index] == NULL) {
         return NULL;
     } else {
@@ -73,7 +82,7 @@ char* lookup(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(
     }
 }
 
-int update(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(void* a, void* b), char* key, char* value) {
+int update(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key, void* value, int fdFlag) {
     int index = hashFun(hT, key);
     if (hT->array[index] == NULL) {
         return 1;
@@ -81,6 +90,7 @@ int update(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(vo
         htNode* cNode = hT->array[index]; //current node
         do {
             if (compare(cNode->key, key) == 0) {
+                if (fdFlag == 1) free(cNode->value);
                 cNode->value = value;
                 return 0;
             }
@@ -91,13 +101,15 @@ int update(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(vo
     return 0;
 }
 
-int removeEnrty(hashTable* hT, int hashFun(hashTable* hT, void * key), int compare(void* a, void* b), char* key) {
+int removeEnrty(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key, int fkFlag, int fdFlag) {
     int index = hashFun(hT, key);
     if (hT->array[index] == NULL) {
         return 1;
     } else if (compare(hT->array[index]->key, key) == 0) {
         htNode* tNode = hT->array[index]; //temporary node
         hT->array[index] = hT->array[index]->child;
+        if (fkFlag == 1) free(tNode->key);
+        if (fdFlag == 1) free(tNode->value);
         free(tNode);
         return 0;
     } else {
@@ -107,6 +119,8 @@ int removeEnrty(hashTable* hT, int hashFun(hashTable* hT, void * key), int compa
         while (cNode != NULL) {
             if (compare(cNode->key, key) == 0) {
                 pNode->child = cNode->child;
+                if (fkFlag == 1) free(cNode->key);
+                if (fdFlag == 1) free(cNode->value);
                 free(cNode);
                 return 0;
             }

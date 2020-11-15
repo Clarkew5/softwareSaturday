@@ -18,9 +18,9 @@ typedef struct {
 hashTable* createHashTable(int size);
 int deleteHashTable(hashTable* hT, int fkFlag, int fdFlag);
 
-int insert(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), char* key, char* value);
-char* lookup(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), char* key);
-int update(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), char* key, char* value);
-int removeEnrty(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), char* key);
+int insert(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key, void* value);
+void* lookup(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key);
+int update(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key, void* value, int fdFlag);
+int removeEnrty(hashTable* hT, int hashFun(hashTable* hT, void* key), int compare(void* a, void* b), void* key, int fkFlag, int fdFlag);
 
 #endif
