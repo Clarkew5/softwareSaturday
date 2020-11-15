@@ -7,15 +7,17 @@ stack* createStack() {
     return s;
 }
 
-int deleteStack(stack* s) {
+int deleteStack(stack* s, int fFlag) {
     if (stackSize(s) > 0) {
         node* cNode = s->head; //current node
         node* nNode = cNode->child; //next node
+        if (fFlag == 1) free(cNode->data);
         free(cNode);
 
         while (nNode != NULL) {
             cNode = nNode;
             nNode = cNode->child;
+            if (fFlag == 1) free(cNode->data);
             free(cNode);
         }
     }
@@ -27,20 +29,20 @@ int stackSize(stack* s) {
     return s->size;
 }
 
-int peekStack(stack* s){
+void* peekStack(stack* s){
     return s->head->data;
 }
 
-int printStack(stack* s) {
+int printStack(stack* s, void printData(void* data)) {
     if (stackSize(s) > 0) {
         struct node* cNode = s->head; //current node
         struct node* nNode = cNode->child; //next node
-        printf("%d ", cNode->data);
+        printData(cNode->data);
 
         while (nNode != NULL) {
             cNode = nNode;
             nNode = cNode->child;
-            printf("%d ", cNode->data);
+            printData(cNode->data);
         }
         printf("\n");
     } else {
@@ -49,7 +51,7 @@ int printStack(stack* s) {
     return 0;
 }
 
-int pushStack(stack* s, int data) {
+int pushStack(stack* s, void* data) {
     s->size++;
     struct node* n = malloc(sizeof(node));
     n->data = data;
@@ -58,9 +60,9 @@ int pushStack(stack* s, int data) {
     return 0;
 }
 
-int popStack(stack* s) {
+void* popStack(stack* s) {
     s->size--;
-    int d = peekStack(s); //data
+    void* d = peekStack(s); //data
     node* oldHead = s->head;
     s->head = oldHead->child;
     free(oldHead);

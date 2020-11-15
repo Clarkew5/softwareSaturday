@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 typedef struct node {
-    int data;
+    void* data;
     struct node* child;
 } node;
 
@@ -12,11 +12,11 @@ typedef struct {
 } stack;
 
 stack* createStack();
-int deleteStack(stack* s);
+int deleteStack(stack* s, int fFlag);
 
 int stackSize(stack* s);
-int peekStack(stack* s);
-int printStack(stack* s);
+void* peekStack(stack* s);
+int printStack(stack* s, void printData(void* data));
 
-int pushStack(stack* s, int data);
-int popStack(stack* s);
+int pushStack(stack* s, void* data);
+void* popStack(stack* s);
