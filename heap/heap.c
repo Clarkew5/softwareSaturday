@@ -107,14 +107,14 @@ int downHeap(heap* h) {
     treeLevel* cLevel = h->head;
     int i = 0;
     while (cLevel->child != NULL && cLevel->child->data[2*i] != NULL){
-        if (cLevel->child->data[2*i + 1] != NULL) {
-            if (cLevel->data[i]->key > cLevel->child->data[2*i]->key
-                && cLevel->child->data[2*i]->key < cLevel->child->data[2*i+1]->key) {
+        if (cLevel->child->data[2*i + 1] != NULL) {//if there are two children
+            if (cLevel->child->data[2*i]->key < cLevel->data[i]->key
+                && cLevel->child->data[2*i]->key <= cLevel->child->data[2*i+1]->key) {
                 swap(cLevel, i, cLevel->child, 2*i);
                 cLevel = cLevel->child;
                 i = 2*i;
-            } else if (cLevel->data[i]->key > cLevel->child->data[2*i+1]->key
-                && cLevel->child->data[2*i + 1]->key < cLevel->child->data[2*i]->key) {
+            } else if (cLevel->child->data[2*i+1]->key < cLevel->data[i]->key
+                && cLevel->child->data[2*i + 1]->key <= cLevel->child->data[2*i]->key) {
                 swap(cLevel, i, cLevel->child, 2*i + 1);
                 cLevel = cLevel->child;
                 i = 2*i + 1;
